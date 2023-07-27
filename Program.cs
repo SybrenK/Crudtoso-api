@@ -1,6 +1,7 @@
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Crudtoso_api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
