@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "master" ]
 env:
-  APP_NAME: Crudtoso-api
+  APP_NAME: crudtoso-api
 
 jobs:
 
