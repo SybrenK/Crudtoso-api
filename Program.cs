@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,10 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlPath);
 });
 
+builder.Services.AddDbContext<CrudtosoDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString"))
+);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
