@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Crudtoso_api.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace Crudtoso_api.Data;
+namespace Crudtoso_api.Model;
 
 public partial class BikesdbContext : DbContext
 {
@@ -26,24 +25,18 @@ public partial class BikesdbContext : DbContext
     {
         modelBuilder.Entity<BikeDb>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("BIKE_DB");
+            entity.HasKey(e => e.ProductId).HasName("PK__BIKE_DB___B40CC6ED7D62BC9E");
 
+            entity.ToTable("BIKE_DB");
+
+            entity.Property(e => e.ProductId).HasColumnName("ProductID");
             entity.Property(e => e.Category)
-                .HasMaxLength(14)
-                .IsUnicode(false);
-            entity.Property(e => e.DateAdded).HasColumnType("date");
-            entity.Property(e => e.Price)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.ProductId).HasColumnName("ProductID");
-            entity.Property(e => e.ProductName)
-                .HasMaxLength(21)
-                .IsUnicode(false);
-            entity.Property(e => e.Supplier)
-                .HasMaxLength(24)
-                .IsUnicode(false);
+            entity.Property(e => e.DateAdded).HasColumnType("date");
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.ProductName).HasMaxLength(50);
+            entity.Property(e => e.Supplier).HasMaxLength(50);
         });
 
         OnModelCreatingPartial(modelBuilder);

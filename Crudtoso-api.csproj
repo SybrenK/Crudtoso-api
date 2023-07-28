@@ -27,7 +27,7 @@
     <Folder Include="Data\DTOs\" />
     <Folder Include="Deployment\Screenshots\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Models\" />
+    <Folder Include="Model\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
