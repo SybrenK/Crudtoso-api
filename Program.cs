@@ -43,7 +43,7 @@ else
 {
     connection = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING");
 }
-builder.Services.AddDbContext<CrudtosoDbContext>(options =>
+builder.Services.AddDbContext<BikesdbContext>(options =>
     options.UseSqlServer(connection));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

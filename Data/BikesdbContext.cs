@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Crudtoso_api.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace Crudtoso_api.Model;
+namespace Crudtoso_api.Data;
 
 public partial class BikesdbContext : DbContext
 {
