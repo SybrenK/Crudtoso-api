@@ -9,6 +9,8 @@ namespace Crudtoso_api.Data.DTOs.Profiles
         public BikeProfile()
         {
             CreateMap<BikeDb, BikeReadDTO>();
+            CreateMap<BikeCreateDTO, BikeDb>();
+            CreateMap<BikeUpdateDTO, BikeDb>();
         }
     }
 }

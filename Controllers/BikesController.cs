@@ -18,12 +18,12 @@ namespace Crudtoso_api.Controllers
     [Produces(MediaTypeNames.Application.Json)]
     [Consumes(MediaTypeNames.Application.Json)]
 
-    public class BikeController : ControllerBase
+    public class BikesController : ControllerBase
     {
         private readonly BikesDbContext _context;
         private readonly IMapper _mapper;
 
-        public BikeController(BikesDbContext context, IMapper mapper)
+        public BikesController(BikesDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
