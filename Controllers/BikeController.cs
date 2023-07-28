@@ -30,74 +30,74 @@ namespace Crudtoso_api.Controllers
         }
 
         /// <summary>
-        /// Retrieves a list of movies along with their associated character movies.
+        /// Retrieves a list of bikes.
         /// </summary>
         /// <returns>An ActionResult containing a list of BikeReadDTO objects.</returns>
-        // GET: api/Movies
+        // GET: api/Bikes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BikeReadDTO>>> GetBikes()
         {
-            // Check if the Movies collection is null.
+            // Check if the Bikes collection is null.
             if (_context.BikeDbs == null)
             {
                 // Return a NotFound response if the collection is null.
                 return NotFound();
             }
 
-            // Query the database to retrieve the list of movies, including their associated character movies.
-            var moviesList = await _context.BikeDbs.ToListAsync();
+            // Query the database to retrieve the list of bikes, including their associated character bikes.
+            var bikesList = await _context.BikeDbs.ToListAsync();
 
-            // Map the moviesList to a list of BikeReadDTO objects using the mapper.
-            var moviesDtoList = _mapper.Map<List<BikeReadDTO>>(moviesList);
+            // Map the bikesList to a list of BikeReadDTO objects using the mapper.
+            var bikesDtoList = _mapper.Map<List<BikeReadDTO>>(bikesList);
 
             // Return the list of BikeReadDTO objects.
-            return moviesDtoList;
+            return bikesDtoList;
         }
 
 
         /// <summary>
-        /// Retrieves a specific movie by its ID.
+        /// Retrieves a specific bike by its ID.
         /// </summary>
-        /// <param name="id">The ID of the movie to retrieve.</param>
-        /// <returns>An ActionResult containing the BikeReadDTO object representing the movie.</returns>
-        // GET: api/Movies/5
+        /// <param name="id">The ID of the bike to retrieve.</param>
+        /// <returns>An ActionResult containing the BikeReadDTO object representing the bike.</returns>
+        // GET: api/Bikes/5
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<BikeReadDTO>> GetMovie(int id)
+        public async Task<ActionResult<BikeReadDTO>> GetBike(int id)
         {
-            // Query the database to retrieve the movie based on the provided ID.
-            var domainMovie = await _context.BikeDbs.FindAsync(id);
+            // Query the database to retrieve the bike based on the provided ID.
+            var domainBike = await _context.BikeDbs.FindAsync(id);
 
-            // Convert the domainMovie to a BikeReadDTO object using the mapper.
-            var movieDTO = _mapper.Map<BikeReadDTO>(domainMovie);
+            // Convert the domainBike to a BikeReadDTO object using the mapper.
+            var bikeDTO = _mapper.Map<BikeReadDTO>(domainBike);
 
-            // Check if the movie ID is in the database.
-            if (movieDTO is null)
+            // Check if the bike ID is in the database.
+            if (bikeDTO is null)
             {
-                // Return a NotFound response if the movie is null.
+                // Return a NotFound response if the bike is null.
                 return NotFound();
             }
 
 
             // Return an OK response with the BikeReadDTO object.
-            return Ok(movieDTO);
+            return Ok(bikeDTO);
         }
 
 
         /// <summary>
-        /// Updates a specific movie with the provided changes.
+        /// Updates a specific bike with the provided changes.
         /// </summary>
-        /// <param name="id">The ID of the movie to update.</param>
+        /// <param name="id">The ID of the bike to update.</param>
         /// <param name="bikeChangeDTO">The BikeUpdateDTO object containing the changes.</param>
         /// <returns>An IActionResult representing the result of the update operation.</returns>
-        // PUT: api/Movies/5
+        // PUT: api/Bikes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(204)]
-        public async Task<IActionResult> PutMovie(int id, BikeUpdateDTO bikeChangeDTO)
+        public async Task<IActionResult> PutBike(int id, BikeUpdateDTO bikeChangeDTO)
         {
             // Check if the provided ID matches the ID in the bikeChangeDTO.
             if (id != bikeChangeDTO.ProductId)
@@ -106,11 +106,11 @@ namespace Crudtoso_api.Controllers
                 return BadRequest();
             }
 
-            // Map the BikeUpdateDTO to a Movie domain object.
-            var domainMovie = _mapper.Map<BikeDb>(bikeChangeDTO);
+            // Map the BikeUpdateDTO to a Bike domain object.
+            var domainBike = _mapper.Map<BikeDb>(bikeChangeDTO);
 
-            // Set the state of the domainMovie object to Modified to indicate that it has been updated.
-            _context.Entry(domainMovie).State = EntityState.Modified;
+            // Set the state of the domainBike object to Modified to indicate that it has been updated.
+            _context.Entry(domainBike).State = EntityState.Modified;
 
             try
             {
@@ -119,10 +119,10 @@ namespace Crudtoso_api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                // Check if the movie with the provided ID exists in the database.
-                if (!MovieExists(id))
+                // Check if the bike with the provided ID exists in the database.
+                if (!BikeExists(id))
                 {
-                    // Return a NotFound response if the movie doesn't exist.
+                    // Return a NotFound response if the bike doesn't exist.
                     return NotFound();
                 }
                 else
@@ -138,68 +138,68 @@ namespace Crudtoso_api.Controllers
 
 
         /// <summary>
-        /// Creates a new movie with the provided data.
+        /// Creates a new bike with the provided data.
         /// </summary>
-        /// <param name="newMovieDTO">The BikeCreateDTO object containing the data for the new movie.</param>
+        /// <param name="newBikeDTO">The BikeCreateDTO object containing the data for the new bike.</param>
         /// <returns>An ActionResult containing the created BikeReadDTO object.</returns>
-        // POST: api/Movies
+        // POST: api/Bikes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [ProducesResponseType(203)]
-        public async Task<ActionResult<BikeDb>> PostMovie(BikeCreateDTO newMovieDTO)
+        public async Task<ActionResult<BikeDb>> PostBike(BikeCreateDTO newBikeDTO)
         {
-            // Check if the Movies collection is null.
+            // Check if the Bikes collection is null.
             if (_context.BikeDbs == null)
             {
                 // Return a Problem response with a specific error message if the collection is null.
-                return Problem("Entity set 'BikesDbContext.Movies' is null.");
+                return Problem("Entity set 'BikesDbContext.Bikes' is null.");
             }
 
-            // Map the BikeCreateDTO to a Movie domain object.
-            var domainMovie = _mapper.Map<BikeDb>(newMovieDTO);
+            // Map the BikeCreateDTO to a Bike domain object.
+            var domainBike = _mapper.Map<BikeDb>(newBikeDTO);
 
-            // Add the domainMovie to the Movies collection.
-            _context.BikeDbs.Add(domainMovie);
+            // Add the domainBike to the Bikes collection.
+            _context.BikeDbs.Add(domainBike);
 
             // Save the changes to the database.
             await _context.SaveChangesAsync();
 
-            // Map the created domainMovie to a BikeReadDTO object.
-            var bikeReadDTO = _mapper.Map<BikeReadDTO>(domainMovie);
+            // Map the created domainBike to a BikeReadDTO object.
+            var bikeReadDTO = _mapper.Map<BikeReadDTO>(domainBike);
 
             // Return a CreatedAtAction response with the created BikeReadDTO object.
-            return CreatedAtAction("GetMovie", new { id = bikeReadDTO.ProductName }, bikeReadDTO);
+            return CreatedAtAction("GetBike", new { id = bikeReadDTO.ProductName }, bikeReadDTO);
         }
 
 
-        // DELETE: api/Movies/5
+        // DELETE: api/Bikes/5
         /// <summary>
-        /// Deletes a specific movie based on the provided ID.
+        /// Deletes a specific bike based on the provided ID.
         /// </summary>
-        /// <param name="id">The ID of the movie to delete.</param>
+        /// <param name="id">The ID of the bike to delete.</param>
         /// <returns>An IActionResult representing the result of the deletion operation.</returns>
         [HttpDelete("{id}")]
         [ProducesResponseType(404)]
         [ProducesResponseType(204)]
-        public async Task<IActionResult> DeleteMovie(int id)
+        public async Task<IActionResult> DeleteBike(int id)
         {
             if (_context.BikeDbs == null)
             {
                 return NotFound();
             }
-            var movie = await _context.BikeDbs.FindAsync(id);
-            if (movie == null)
+            var bike = await _context.BikeDbs.FindAsync(id);
+            if (bike == null)
             {
                 return NotFound();
             }
 
-            _context.BikeDbs.Remove(movie);
+            _context.BikeDbs.Remove(bike);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool MovieExists(int id)
+        private bool BikeExists(int id)
         {
             return (_context.BikeDbs?.Any(e => e.ProductId == id)).GetValueOrDefault();
         }
