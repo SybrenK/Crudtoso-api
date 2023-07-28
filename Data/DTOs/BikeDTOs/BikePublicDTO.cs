@@ -5,7 +5,7 @@ namespace Crudtoso_api.Data.DTOs.BikeDTOs
 {
 
 
-    public partial class BikeDTO
+    public partial class BikePublicDTO
     {
         public int ProductId { get; set; }
 

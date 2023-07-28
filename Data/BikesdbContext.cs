@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Crudtoso_api.Data;
 
-public partial class BikesdbContext : DbContext
+public partial class BikesDbContext : DbContext
 {
-    public BikesdbContext()
+    public BikesDbContext()
     {
     }
 
-    public BikesdbContext(DbContextOptions<BikesdbContext> options)
+    public BikesDbContext(DbContextOptions<BikesDbContext> options)
         : base(options)
     {
     }

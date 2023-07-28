@@ -44,7 +44,7 @@ else
 {
     connection = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING");
 }
-builder.Services.AddDbContext<BikesdbContext>(options =>
+builder.Services.AddDbContext<BikesDbContext>(options =>
     options.UseSqlServer(connection));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
