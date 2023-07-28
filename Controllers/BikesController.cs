@@ -103,7 +103,7 @@ namespace Crudtoso_api.Controllers
             if (id != bikeChangeDTO.ProductId)
             {
                 // Return a BadRequest response if the IDs don't match.
-                return BadRequest();
+                return BadRequest("Queried ID & ID in updated json don't match");
             }
 
             // Map the BikeUpdateDTO to a Bike domain object.
@@ -143,9 +143,8 @@ namespace Crudtoso_api.Controllers
         /// <param name="newBikeDTO">The BikeCreateDTO object containing the data for the new bike.</param>
         /// <returns>An ActionResult containing the created BikeReadDTO object.</returns>
         // POST: api/Bikes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        [ProducesResponseType(203)]
+        [ProducesResponseType(201)]
         public async Task<ActionResult<BikeDb>> PostBike(BikeCreateDTO newBikeDTO)
         {
             // Check if the Bikes collection is null.
@@ -204,7 +203,7 @@ namespace Crudtoso_api.Controllers
             return (_context.BikeDbs?.Any(e => e.ProductId == id)).GetValueOrDefault();
         }
 
-        //CUSTOM ENDPOINTS
+        //CUSTOM ENDPOINTS IF WE WANT ANY 
 
 
     }
