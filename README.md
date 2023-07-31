@@ -21,6 +21,14 @@ The API is documented via Swagger/OpenAPI.
 
 # CI/CD
 The docker repo used in the Azure deployment of crudtoso-api can be found here: https://hub.docker.com/repository/docker/sybrenk/crudtoso-api/
+The Azure deployment features continuous deployment, using a Docker Webhook.
 
 # Footage
 Deployment footage is included in the `Deployments` directory. This includes the used commands and screenshots.
+
+# Issues
+- When deployed on Azure, the API does not grab the connectionstring from the Web App environment, despite being specified in the Application settings along with `ASPNETCORE_ENVIRONMENT = Production`. 
+
+# Future implementations
+- Images: Blob Storage + CDN media endpoint
+- Authentication via Azure AD
