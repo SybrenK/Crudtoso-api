@@ -27,6 +27,7 @@
   <ItemGroup>
     <Folder Include="Deployment\Screenshots\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Costs\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
