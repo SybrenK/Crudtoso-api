@@ -55,7 +55,7 @@ Cost estimates are provided in the Costs directory. Currently contains the follo
 
 ## Issues
 - When deployed on Azure, the API does not grab the connection string from the Web App environment, despite being specified in the Application settings along with ASPNETCORE_ENVIRONMENT = Production.
-- (01-08) Event Grid cannot send emails on event. (Said will add on this)
+- Workflow of the Logic App is not triggering, created a workflow that triggers when StockQuantity goes below certain amount and sends an email to inventory manager.
 
 ## Future implementations
 - Images: Blob Storage + CDN media endpoint
