@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Crudtoso_api.Data;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Configuration;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,7 +60,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Configure Azure Cache 4 Redis
+string _redisConnectionString = Environment.GetEnvironmentVariable("REDIS_CONNECTIONSTRING");
+void ConfigureServices(IServiceCollection services)
+{
+    // Add Redis cache to the dependency injection container
+    services.AddSingleton<IConnectionMultiplexer>(_ =>
+    {
+        // Create Redis cache connection
+        return ConnectionMultiplexer.Connect(_redisConnectionString);
+    });
+
+}
+    app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
